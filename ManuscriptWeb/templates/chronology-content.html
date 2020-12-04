@@ -1,0 +1,221 @@
+<div class="myflexcontainer">
+
+
+    <div id="libraryPlot">
+        <div data-template="app:loadingSpinner" data-template-mytext="Library"/>
+    </div>
+   
+        
+    <div id="notebookPlot" style="padding-bottom:20px;">
+        <div data-template="app:loadingSpinner" data-template-mytext="Notebooks"/>
+    </div>
+    
+    <div id="chronDetail">    
+        
+    </div>
+    
+ 
+        
+        <div class="flexheightfiller">            
+            <div id="theDocument" class="row no-gutters">
+                
+                <div id="sourceField" class="col gutter-col-2">
+                    <div class="textViewer tv-wrapper">
+                        <div class="tv-header"> Source Documents </div>
+                        <div class="tv-content">
+                            
+                            <div id="source-accordion">
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gutter gutter-horizontal"/>
+                
+                <div id="textViewField" class="col gutter-col">
+                    <div id="textViewInfo">
+                    Click on a document in the timeline to see how it relates to other documents. On the left side you will see source documents that relate to the making of the selected one. 
+                    </div>
+                </div> 
+                
+                <div class="gutter gutter-horizontal"/>
+                
+                <div id="targetField" class="col gutter-col-2"> 
+                    <div class="textViewer tv-wrapper">
+                        <div class="tv-header"> Following Documents </div>
+                        <div class="tv-content">
+                            
+                            <div id="target-accordion">
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div> 
+                
+            </div>
+        </div>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+       <script>
+         var librarydata = [];
+         $.get ("$app/modules/ajax-calls.xql?action=getLibraryEvents", function (data) {
+                $("#libraryPlot").empty();
+                
+                 var libraryColor = d3.scaleLinear().domain([1,20])
+                 .range(["#85deff", "#003c52"]) 
+                 
+                 librarydata.push(stackOrder(data));
+                 
+                 var f = TimelinesChart()
+                 .data(librarydata)
+                 .zQualitative(true)
+                 (document.getElementById('libraryPlot'))
+                 .maxLineHeight(14)
+                 .zColorScale(libraryColor)
+                 .timeFormat("%Y-%m-%d")
+                 //disable horizontal and vertical zoom (library does not need zoom)
+                 .onZoom(function(k){f.zoomY([null]);f.zoomX([null]);})
+                 .segmentTooltipContent(function(e){
+                 var mytext = "&lt;h4&gt; " + e.timeRange[0].getFullYear()+ ": " + e.labelVal + "&lt;/h4&gt;";
+                    return mytext;
+                 })
+                 .onSegmentClick(function(e)
+                 {
+                    loadDetail(e);
+                 })
+                 .enableOverview(false)
+                 .bottomMargin(20)
+                 .topMargin(0);
+                 $("#libraryPlot svg.brusher").remove();
+                 $("#libraryPlot g .legend").remove();
+         });
+       </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <script>
+            var sourcedata = [];//getRandomData(true);
+            $.get ("$app/modules/ajax-calls.xql?action=getEvents", function (data) { //getting ALL events (except library --&gt; speparate timeline!)
+               
+                
+                $.get ("$app/modules/ajax-calls.xql?action=getLetterEvents", function (letterdata) {
+                
+                             $("#notebookPlot").empty();                
+                             var myColor = d3.scaleLinear().domain([1,20]).range(["#00F000", "#006000"]) 
+                             sourcedata.push(stackOrder(data));
+                            sourcedata.push(stackOrder(letterdata));
+                             var e = TimelinesChart()
+                             .data(sourcedata)
+                             .zQualitative(true)
+                             (document.getElementById('notebookPlot'))
+                             .maxLineHeight(14)
+                             .zColorScale(myColor)
+                             .timeFormat("%Y-%m-%d")
+                             .enableOverview(false)
+                             //disable horizontal zoom!
+                             .onZoom(function(f){console.log(e);e.zoomY([null]);})
+                             .onSegmentClick(function(e)
+                             {
+                                    loadDetail(e);
+                             })
+                             .segmentTooltipContent(function(e){
+                                //console.log(e.labelVal);
+                                var mytext = "&lt;h3&gt; " + e.labelVal + "&lt;/h3&gt; &lt;/hr/&gt; &lt;p&gt; Sources: " + e.val + "&lt;/p&gt;";
+                                return mytext;
+                             });
+                             $("g .y-axis").remove();
+                             $("g .legend").remove();
+                });
+                
+                
+            });
+            
+            
+            
+
+            
+            function stackOrder(data){
+                     var ursprung = data[0];  
+                     
+                     var newData = {"group": ursprung.group, "data" : [] };
+                     var rows = newData.data;
+                     
+                     var trackEnddates = [];
+                     
+                     for (index in ursprung.data)
+                     {
+                     if(index == 0){
+                     trackEnddates.push(ursprung.data[index].timeRange[1])
+                     //data[0].data[index].stack = 0;//this line wont be neccessary anymore
+                     rows.push({"label":index, "data":[ursprung.data[index]]})
+                     
+                     }else{
+                     var isAdded = false;
+                     for (el in trackEnddates){
+                     if( trackEnddates[el] &lt; ursprung.data[index].timeRange[0] )
+                     {
+                     if(rows[el]){
+                     rows[el].data.push(ursprung.data[index])} 
+                     //this else should never be reached
+                     else{
+                     rows.push({"label":el, "data":[ursprung.data[index]]})
+                     }
+                     trackEnddates[el] = ursprung.data[index].timeRange[1];
+                     isAdded = true;
+                     break;
+                     }
+                     };
+                     if (isAdded == false){
+                     trackEnddates.push(ursprung.data[index].timeRange[1]);
+                     rows.push({"label": trackEnddates.length - 1, "data":[ursprung.data[index]]});
+                     
+                     };
+                     
+                     }
+                     }
+                     return newData;
+            }
+            
+            
+            //for the three parted split screen 
+            var splitobj = Split(
+                ["#sourceField","#textViewField","#targetField"], 
+                {
+                    elementStyle: function (dimension, size, gutterSize) { 
+                                    return {'flex-basis': 'calc(' + size + '% - ' + 2*gutterSize + 'px)'}
+                                  },
+                    gutterStyle:  function (dimension, gutterSize) { 
+                                    return {'flex-basis':  gutterSize + 'px'} 
+                                  },
+                    sizes:        [25,50,25],
+                    minSize:      100,
+                    gutterSize:   6,
+                    cursor:       'col-resize'
+            });
+        </script>
+    
+</div>

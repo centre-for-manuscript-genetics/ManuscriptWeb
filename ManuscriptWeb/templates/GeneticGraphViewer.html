@@ -1,0 +1,320 @@
+<div class="geneticViewer gv-wrapper">
+    <div class="gv-header">
+        <div class="icon-bar icon-bar-gengraphviewer">
+            <button id="gv-btn-context" class="btn btn-mw-outline my-2 my-sm-0 ">Set As Context Node</button>
+            <button id="gv-btn-open" class="btn btn-mw-outline my-2 my-sm-0 ">Open on Desktop</button>
+            <button id="gv-btn-relations" class="btn btn-mw-outline my-2 my-sm-0 ">Show Relations</button>
+        </div>
+    </div>
+    <div class="gv-content">
+        <div id="graphnetwork" style="height: 100%;" class="editContainer"/>
+    </div>
+    <div class="gv-footer gv-thumbslider">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-sm justify-content-center">
+                <li class="page-item ">
+                    <a class="page-link" tabindex="-1">First</a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link">1</a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link">2</a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link">3</a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" onclick="addNode()">random node </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <script type="text/javascript">
+        <!--
+        var shadowState, nodes, edges, network, contextNode;
+        var nodesArray = [];
+        var edgesArray = [];
+        var nodeIds = [];
+        function startNetwork(startid) {
+            hardDelete();
+            loadDoc("$app/modules/ajax-calls.xql?action=getGenGraph&entrypoint=" + startid, function (e) {
+                var data = jQuery.parseJSON(e.responseText);
+                if(data.success == "true"){
+                   nodesArray.push({id: startid, shape: "image",  image: data.context.docPath.replace("/db/","/exist/")+"/icon.JPG", label: data.context.docLabel, color: {
+                        border: 'red',
+                        background: '#fbfbfb'
+                        } })
+                   nodeIds.push(startid);
+                   var incoming=[];
+                   var outgoing=[];
+                   if(data.incomingDocLevel){
+                        $(data.incomingDocLevel).each(function(){
+                            nodesArray.push({id: this.docId, shape: "image", image: this.docPath.replace("/db/","/exist/")+"/icon.JPG", label: this.docLabel });
+                            edgesArray.push({from: this.docId, to: startid, arrows: 'to', label : this.countRel.toString(), color:{color:'#343a40'}})
+                        });
+                   
+                        /*    
+                        data.incomingDocLevel.forEach(function(obj) { 
+                             if(incoming.indexOf(obj.from.docid) === -1){
+                                 incoming.push(obj.from.docid);
+                                 nodesArray.push({id: obj.from.docid, shape: "image", image: obj.from.picPath.replace("/db/","/exist/")+"/icon.JPG", label: obj.from.doclabel });
+                                 nodeIds.push(obj.from.docid);
+                                 if(obj.from.phraseid && obj.from.phraseid != ""){
+                                    edgesArray.push({from: obj.from.docid, to: startid, arrows: 'to', label : "1", color:{color:'#343a40'}});}else{
+                                    edgesArray.push({from: obj.from.docid, to: startid, arrows: 'to', label : "0", color:{color:'#343a40'}});
+                                 }
+                             } else{
+                                 var a =  (parseInt(edgesArray.find(edje => edje.from == obj.from.docid).label)+1).toString();
+                                 //console.log(a);
+                                 edgesArray.find(edje => edje.from == obj.from.docid).label = a;
+                             }
+                             
+                        });
+                        */
+                   }
+                   if(data.outgoingDocLevel){
+                         console.log(typeof(data.outgoingDocLevel));
+                         $(data.outgoingDocLevel).each(function() { 
+                            nodesArray.push({id: this.docId, shape: "image", image: this.docPath.replace("/db/","/exist/")+"/icon.JPG", label: this.docLabel });
+                            edgesArray.push({from: startid, to: this.docId, arrows: 'to', label : this.countRel.toString(), color:{color:'#343a40'}})
+                        
+                         });
+                        /*
+                        data.outgoingDocLevel.forEach(function(obj) { 
+                             if(outgoing.indexOf(obj.to.docid) === -1){
+                                 outgoing.push(obj.to.docid);
+                                 nodesArray.push({id: obj.to.docid, shape: "image", image: obj.to.picPath.replace("/db/","/exist/")+"/icon.JPG", label: obj.to.doclabel });
+                                 nodeIds.push(obj.to.docid);
+                                 if(obj.to.phraseid && obj.to.phraseid != ""){
+                                    edgesArray.push({from: startid, to: obj.to.docid, arrows: 'to', label : "1", color:{color:'#343a40'}});}else{
+                                    edgesArray.push({from: startid, to: obj.to.docid, arrows: 'to', label : "0", color:{color:'#343a40'}});
+                                 }
+                             }else{
+                                 var a =  (parseInt(edgesArray.find(edje => edje.to == obj.to.docid).label)+1).toString();
+                                 //console.log(a);
+                                 edgesArray.find(edje => edje.to == obj.to.docid).label = a;
+                             }
+                             
+                        });
+                        */
+                        
+                   }    
+                        
+                        
+                        //loadContent("#content", "$app/templates/module-content.html?resource="+entryPoint);
+                }
+            
+            
+           
+            shadowState = false;
+        
+        
+             // create an array with nodes
+             var DIR = '$app/data/modules/notes-buffalo/collection-bseries/notebook-vib01/facsimiles/thumbs/';
+             
+             
+             /*nodesArray = [
+             {id: 1,  shape: 'image', image: DIR + 'VI.B.1.001.JPG'},
+             {id: 2,  shape: 'image', image: DIR + 'VI.B.1.002.JPG'},
+             {id: 3,  shape: 'image', image: DIR + 'VI.B.1.003.JPG'},
+             {id: 4,  shape: 'image', image: DIR + 'VI.B.1.004.JPG', label:"Concext Node"},
+             {id: 5,  shape: 'image', image: DIR + 'VI.B.1.005.JPG'},
+             {id: 6,  shape: 'image', image: DIR + 'VI.B.1.006.JPG'},
+             {id: 7,  shape: 'image', image: DIR + 'VI.B.1.007.JPG'},
+             {id: 8,  shape: 'image', image: DIR + 'VI.B.1.008.JPG'},
+             {id: 9,  shape: 'image', image: DIR + 'VI.B.1.009.JPG'},
+             {id: 10, shape: 'image', image: DIR + 'VI.B.1.010.JPG'},
+             {id: 11, shape: 'image', image: DIR + 'VI.B.1.011.JPG'},
+             {id: 12, shape: 'image', image: DIR + 'VI.B.1.012.JPG'},
+             {id: 13, shape: 'image', image: DIR + 'VI.B.1.013.JPG'},
+             {id: 14, shape: 'image', image: DIR + 'VI.B.1.014.JPG'}, 
+             {id: 15, shape: 'image', image: DIR + 'VI.B.1.014.JPG', brokenImage: DIR + 'VI.B.1.014.JPG', label:"Broken Image"}
+             ];*/
+             
+             // create an array with edges
+             /*edgesArray = [
+             {from: 1, to: 2},
+             {from: 2, to: 3},
+             {from: 2, to: 4},
+             {from: 4, to: 5},
+             {from: 4, to: 10},
+             {from: 4, to: 6},
+             {from: 6, to: 7},
+             {from: 7, to: 8},
+             {from: 8, to: 9},
+             {from: 8, to: 10},
+             {from: 10, to: 11},
+             {from: 11, to: 12},
+             {from: 12, to: 13},
+             {from: 13, to: 14},
+             {from: 9, to: 15}
+             ];*/
+             
+             nodes = new vis.DataSet(nodesArray);
+             contextNode = nodes.get(startid);
+             edges = new vis.DataSet(edgesArray);
+             
+             // create a network
+             var container = document.getElementById('graphnetwork');
+             var data = {
+                 nodes: nodes,
+                 edges: edges
+             };
+             var options = {  
+                    nodes: {
+                        borderWidth:4,
+                        size:30,
+                        color: {
+                        border: '#343a40',
+                        background: '#fbfbfb'
+                        },
+                        font:{color:'#008000'},
+                        shapeProperties: {
+                        useBorderWithImage:true
+                        }
+                        },
+                    edges: {
+                        smooth: {
+                            type: "horizontal"
+                         },
+                         font: {
+                                size: 16
+                                },
+                         widthConstraint: {
+                                maximum: 90
+                                }
+                    },
+                    physics: {
+                        enabled: false,
+                        minVelocity: 0.75
+                    },
+                    layout : {
+                        randomSeed: undefined,
+                        improvedLayout:true
+                    },
+                };
+             
+             network = new vis.Network(container, data, options);
+             
+             network.on("selectNode", function (properties) {
+                if( properties.nodes[0] != contextNode.id){
+                    $("#gv-btn-context").data('startnode',properties.nodes[0]);
+                    //alert( $("#gv-btn-context").data('startnode'));
+                    $("#gv-btn-context").show();
+                    
+                }
+                $("#gv-btn-open").show();
+                
+             });
+             network.on("deselectNode", function(properties){
+                 $("#gv-btn-context").hide();
+                 $("#gv-btn-open").hide();
+             });
+             network.on("select", function(properties){
+                 edgecount = properties.edges.length;
+                 nodecount = properties.nodes.length;
+                 if(edgecount == 1 && edges.get(properties.edges[0]).label != "0"){
+                    $("#gv-btn-relations").show();
+                 } else {
+                    $("#gv-btn-relations").hide();
+                 }
+             });
+             
+             
+             });
+        }
+        
+        function newNetwork(){
+        
+        
+        }
+        
+        function addNode() {
+            var newId = (Math.random() * 1e7).toString(32);
+            nodes.add({id:newId, label:"I'm new!"});
+        }
+        
+        function changeNode1() {
+        var newColor = '#' + Math.floor((Math.random() * 255 * 255 * 255)).toString(16);
+        nodes.update([{id:1, color:{background:newColor}}]);
+        }
+        
+        function changeOptions() {
+            shadowState = !shadowState;
+            network.setOptions({nodes:{shadow:shadowState},edges:{shadow:shadowState}});
+        }
+        
+        function resetAllNodes() {
+             nodes.clear();
+             edges.clear();
+             nodes.add(nodesArray);
+             edges.add(edgesArray);
+        }
+        
+        function resetAllNodesStabilize() {
+            resetAllNodes();
+            network.stabilize();
+        }
+        
+        function setTheData() {
+            nodes = new vis.DataSet(nodesArray);
+            edges = new vis.DataSet(edgesArray);
+            network.setData({nodes:nodes, edges:edges})
+        }
+        
+        
+        function hardDelete(){
+            network = null;
+            nodes = null;
+            edges = null;
+            shadowState=null;
+            contextNode=null;
+            nodesArray = [];
+            edgesArray = [];
+            nodeIds = [];
+        }
+        
+        function restartNetwork(setId) {
+            console.log("restarting with:" + setId);
+            if (network !== null) {
+                network.destroy();
+            }
+            if  (nodes !== null){
+                 nodes.clear();
+            }
+            if (edges !== null){
+                edges.clear();
+            }
+            network = null;
+            nodes = null;
+            edges = null;
+            shadowState=null;
+            contextNode=null;
+            nodesArray = [];
+            edgesArray = [];
+            nodeIds = [];
+            startNetwork(setId);
+        }
+        
+        
+        /* Used to load documents if there is a recall neccessary*/
+        function loadDoc(url, cfunc) {
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+              if (xhttp.readyState == 4 && xhttp.status == 200) {
+                cfunc(xhttp);
+              }
+            };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+        $("#gv-btn-context").on("click",function(e){
+                        restartNetwork($("#gv-btn-context").data("startnode"));
+                    });
+                    
+        startNetwork($("#theDocument").attr('data-resourceid'));
+        -->
+    </script>
+</div>

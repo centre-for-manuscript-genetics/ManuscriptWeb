@@ -1,0 +1,10 @@
+ManuscriptWeb/data/modules/drafts*
+ManuscriptWeb/data/modules/library*
+ManuscriptWeb/data/modules/editions*
+ManuscriptWeb/data/modules/notes*
+ManuscriptWeb/data/modules/config.xml
+
+ManuscriptWeb/data/relations/*
+ManuscriptWeb/data/libraryAuthors/*
+ManuscriptWeb/data/sources.xml
+ManuscriptWeb/data/restrictImages.xml

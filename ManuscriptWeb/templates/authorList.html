@@ -1,0 +1,86 @@
+<div xmlns="http://www.w3.org/1999/xhtml" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+
+    <!-- This is just a wrapper for non-ajax calls of the about page. Please edit the about page via templates/about-content.html -->
+
+    <div>
+       
+        <div id="tableDiv"/>
+
+        
+        <script>
+            
+            $(document).ready( function( $ ) {
+            loader("Author List", "#tableDiv");
+            $.ajax({
+            "url": '$app/modules/ajax-calls.xql?action=getAuthors',
+            "success": function(json) {
+            var tableHeaders = "";
+            var cols = [];
+            $.each(json.tableHead, function(i, val){
+                tableHeaders += "&lt;th data-elementName='" + val.element + "' &gt;" + val.label + "&lt;/th&gt;";
+                //if user is logged in
+                if(json.loggedIn){
+                    //complex rows... decide what to do later
+                    if(val.nOf == "true"){cols.push( {data: val.element });}
+                    //editable simple text rows get editable class
+                    else{cols.push( {data: val.element, className: "editable-tablecell"});}
+                }
+                //else: user not logged in
+                else{
+                    cols.push( {data: val.element });
+                }
+                
+            });
+            
+
+            $("#tableDiv").empty();
+            $("#tableDiv").append('&lt;table id="displayTable" class="table-striped display nowrap hover" cellspacing="0" style="width: 100%"&gt;&lt;thead&gt;&lt;tr&gt;' + tableHeaders + '&lt;/tr&gt;&lt;/thead&gt;&lt;/table&gt;');
+           
+            
+            var table = $('#displayTable').dataTable(
+                    {
+                        "data" : json.data,
+                        "columns": cols,
+                        "scrollX": true,
+                        "scrollY": "450px",
+                        createdRow: function (row, data, dataIndex) {
+                                //add the ID to each row
+                                $(row).attr('data-id', data.elementID);
+                                //$(row).find('td').attr('test',"test");
+                        }
+                        /*,"columnDefs": [{
+                            "targets": 3,
+                            "createdCell": function (td, cellData, rowData, row, col) {
+                                console.log(cellData);
+                                $(td).css('color', 'red');
+                            
+                            }
+                        }]*/
+                    }   
+                );
+                
+                /*$('#displayTable tbody').on('click', 'td', function (e) {
+                        console.log(this); 
+                        console.log(e);
+                });   */ 
+            },
+            "dataType": "json"
+            
+            
+            
+            });
+            
+           
+            
+            
+            });
+        </script>
+        
+    </div>
+
+
+
+
+
+
+</div>

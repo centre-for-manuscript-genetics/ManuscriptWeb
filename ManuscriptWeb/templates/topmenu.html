@@ -1,0 +1,148 @@
+<nav class="navbar navbar-expand-md fixed-top bg-dark">
+
+    <a data-template="app:get-home-logo"/>
+
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"/>
+    </button>
+
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a data-template="app:get-modules-link"/>
+            </li>
+            <li class="nav-item">
+                <a data-template="app:get-chronology-link"/>
+            </li>
+            <ul class="navbar-nav left-dotted-nav">
+            </ul>
+            
+            <li class="nav-item dropdown multi-level ">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Document
+                </a>
+                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item" tabindex="-1" href="#">View</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item viewchange active" data-view="default">Text|Image</li>
+                            <li class="dropdown-item viewchange" data-view="text">Text</li>
+                            <li class="dropdown-item viewchange" data-view="image">Image</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"/>
+                    <li class="dropdown-item gengraphBtn">Genesis Graph</li>
+                    <li class="dropdown-item">Some future action</li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <!--
+            <li class="nav-item dropdown multi-level ">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Edit
+                </a>
+                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li class="dropdown-submenu">
+                        <a  class="dropdown-item" tabindex="-1" href="#">View</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item" href="#">Even More...</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item"><a href="#">3rd level</a></li>
+                                    <li class="dropdown-submenu"><a class="dropdown-item" href="#">another level</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-item"><a href="#">4th level</a></li>
+                                            <li class="dropdown-item"><a href="#">4th level</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-item"><a href="#">3rd level</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-item"><a href="#">Something</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-item"><a href="#">Some action</a></li>
+                    <li class="dropdown-item"><a href="#">Some other action</a></li>
+                    
+                </ul>
+            </li>-->
+
+            <!-- this ul (especially the ID attribute) are mandatory for windowManager.js. this is the taskbar for the windowmanager, here the window-buttons are added -->
+            <ul id="windows-section" class="navbar-nav left-dotted-nav">
+            </ul>
+        </ul>
+
+        
+
+
+
+
+        <!--whatever goes into the navs right-hand side -->
+        <ul class="navbar-nav mr-right ml-md-5 left-dotted-nav">
+            <!-- this is the about link -->
+            <li class="nav-item">
+                <a data-template="app:get-about-link"/>
+            </li>
+            <!--this is the cite link-->
+            <li class="nav-item">
+                <a data-template="app:get-cite-link"/>
+            </li>
+            
+            <!--
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-search"/>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div style="margin-left:10px;"> some custom settings for the search form...
+                            <form class="form-inline">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button class="btn btn-outline-success " type="submit">
+                                <i class="fas fa-search"/>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </li>-->
+            <div data-template="templates:if-parameter-set" data-template-param="org.exist-db.ManuscriptWeb.user">
+                <li class="nav-item ">
+                    <a class="nav-link explorer-link" data-shownurl="/Settings/">
+                        <i class="fas fa-cog"/>
+                    </a>
+                </li>
+            </div>
+            <div data-template="templates:if-parameter-set" data-template-param="org.exist-db.ManuscriptWeb.user">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"/>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">User Info</a>
+                        <a class="dropdown-item" href="#">My Relations</a>
+                        <a class="dropdown-item" href="#">Whatever...</a>
+                        <div class="dropdown-divider"/>
+                        <form method="post" class="form-inline">
+                            <input type="hidden" name="logout" value="true"/>
+                            <button id="logoutBtn" type="submit" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"/> Logout <span data-template="app:username"/>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            </div>
+            <div data-template="templates:if-parameter-unset" data-template-param="org.exist-db.ManuscriptWeb.user">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#loginModal">
+                        <i class="fas fa-user"/>
+                    </a>
+                </li>
+            </div>
+        </ul>
+
+    </div>
+</nav>

@@ -1,0 +1,9 @@
+<resources>
+   <collection>
+      <label>New Collection</label>
+      <description>This is the default description of a new collection.</description>
+   </collection>
+   <document>
+      
+   </document>
+</resources>

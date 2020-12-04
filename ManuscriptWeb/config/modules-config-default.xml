@@ -1,0 +1,33 @@
+<modules>
+    <!-- Library Module -->
+    <module activated="true">
+        <type>library</type>
+        <label>Library</label>
+        <description>This is a default description of a new library module.</description>
+    </module> 
+    
+    
+    <!-- Notes Module -->
+    <module activated="true">
+        <type>notes</type>
+        <label>Notes</label>
+        <description>This is a default description of a new notes module.</description>
+    </module>  
+    
+    
+    <!-- Drafts Module -->
+    <module activated="true">
+        <type>drafts</type>
+        <label>Drafts</label>
+        <description>This is a default description of a new drafts module.</description>
+    </module>
+    
+    <!-- Editions Module -->
+    <module activated="true">
+        <type>editions</type>
+        <label>Editions</label>
+        <description>This is a default description of a new editions module.</description>
+    </module>
+    
+    
+</modules>

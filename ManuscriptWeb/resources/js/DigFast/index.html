@@ -1,0 +1,270 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/treejs/style.min.css"/>
+<!--externally developed JS libs-->
+<script src="./js/jquery-1.11.3.min.js"/>
+<script src="./js/bootstrap.min.js"/>
+<script src="./js/treejs/jstree.min.js"/>
+<script src="./js/interact-1.2.4.js"/>
+</head>
+<body>
+<!--
+##############################################################################################
+##############################################################################################
+								Menu Area
+##############################################################################################
+##############################################################################################
+-->	
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">DigFAST</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File <span class="caret"/>
+                            </a>
+          <ul class="dropdown-menu">
+            <li class="before_start">
+                                    <a href="#" onClick="startWithImage()">Start with Image</a>
+                                </li>
+            <li class="hidden after_start">
+                                    <a href="#">Save TEI file</a>
+                                </li>
+            <li role="separator" class="divider hidden after_start"/>
+            <li class="hidden after_start">
+                                    <a href="#">Restart</a>
+                                </li>
+          </ul>
+        </li>
+		<li class="dropdown hidden after_start">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Selected Element<span class="caret"/>
+                            </a>
+          <ul class="dropdown-menu">
+            <li>
+                                    <a href="#">Edit Attributes</a>
+                                </li>
+            <li role="separator" class="divider"/>
+            <li>
+                                    <a href="#">Move Up (TEI)</a>
+                                </li>
+			<li>
+                                    <a href="#">Move Down (TEI)</a>
+                                </li>
+			<li role="separator" class="divider"/>
+			<li>
+                                    <a href="#" onClick="toggleElementLocker(event)">Lock/Unlock (Rectangle)</a>
+                                </li>
+			<li role="separator" class="divider"/>
+			<li>
+                                    <a href="#">Move to Front (Rectangle)</a>
+                                </li>
+			<li>
+                                    <a href="#">Move to Background (Rectangle)</a>
+                                </li>
+			<li role="separator" class="divider"/>
+			<li>
+                                    <a href="#" onClick="deleteSelected(event)">Delete Selected Element</a>
+                                </li>
+          </ul>
+        </li>
+		<li id="dia_stage" class="hidden after_start">
+                            <a href="#" onClick="addProfileDesc()">Add Diachronic Staging</a>
+                        </li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+		<li>
+                            <a href="#" data-toggle="modal" data-target="#textstageModal">Temp Modal</a>
+                        </li>
+        <li>
+                            <a href="#" data-toggle="modal" data-target="#aboutModal">About</a>
+                        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Export<span class="caret"/>
+                            </a>
+          <ul class="dropdown-menu">
+            <li>
+                                    <a href="#" onClick="onTEIdownload(event)">Export TEI Document</a>
+                                </li>
+            <li>
+                                    <a href="#" onClick="onSVGdownload(event)">Export SVG Document</a>
+                                </li>
+		   </ul>
+        </li>
+      </ul>
+	  
+			<div id="rotation_area">
+				Rotate Active Zone: 
+				<a id="rot_left" onClick="rotateRect(lastMovedId,-0.5)">
+                            <img class="rot_img" src="./img/rotate_anticlock.png"/>
+                        </a>
+				<a id="rot_right" onClick="rotateRect(lastMovedId,0.5)">
+                            <img class="rot_img" src="./img/rotate_clock.png"/>
+                        </a>
+			</div>	
+    </div>
+  </div>
+</nav>
+
+<!--
+##############################################################################################
+##############################################################################################
+								Edit Area, Divided in facsimile/SVG and TEI Area
+##############################################################################################
+##############################################################################################
+-->	
+<div id="editContainer"> 
+	<!--
+	##############################################################################################
+								facsimile/SVG Area
+	##############################################################################################
+	-->	
+		
+		<!--The button-group for facsimile scaling that is shown in the left hand corner on top of the svg field-->
+		<div class="btn-group btn-group-s" role="group" aria-label="..." id="resizeButtons">
+				<button type="button" onClick="scaleCanvas(-1)" class="btn btn-default">
+					<span class="glyphicon glyphicon-zoom-out" aria-hidden="true"/>
+				</button>
+				<button type="button" onClick="scaleCanvas(0)" class="btn btn-default">
+					<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"/>
+				</button>
+				<button type="button" onClick="scaleCanvas(1)" class="btn btn-default">
+					<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"/>
+				</button>
+		</div>
+	
+		<!--the actual svg area-->
+		<div id="svg_area" class="resize-container">
+		
+			<div id="beginnButtons">
+				<!--<a href="#" onClick="startWithoutImage()"><div class="well">Start Without Image</div></a>-->
+				
+				<a href="#" onClick="startWithImage()">
+                        <div class="well">Start With Image File</div>
+                    </a>
+				<input id="imgFile" onchange="addImageToSVG(event)" style="display:none" type="file"/>
+			</div>
+			
+			<!--here an svg file is added. At a later stage a "load image" button should load a facsimile in the back of the svg -->
+			<div id="trulala" style="position: relative; left: 0; top: 0;">
+				<svg id="myCanvas" width="600" height="500" style="position: absolute; top: 0; left: 0;">
+				</svg>
+			</div>
+		</div>
+
+
+	<!--
+	##############################################################################################
+								TEI+Worktools Area
+	##############################################################################################
+	-->	
+		<div id="text_area">
+			<!--Container for tree.js-->
+			<div id="html1">
+				
+			</div>
+			
+		
+			
+			
+			
+	
+
+		
+		<script src="./js/DigFast.js"/>
+		<script src="./js/rotate.js"/>
+		<script type="text/javascript">
+			$(document).ready(function(){
+					$.jstree.defaults.core.themes.variant = "large";
+					$('#html1').jstree({'core' : {'check_callback' : true}}); 	
+			});
+		</script>
+			
+	</div>
+</div>
+
+<!-- 
+######################################################################
+                       ABOUT-MODAL 
+######################################################################
+-->
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h3 class="modal-title" id="myModalLabel">DigFast</h3>
+		<h4>(Digital Facsimile Authoring Support Tool)</h4>
+	  </div>
+	  <div class="modal-body">
+		<div>
+			<h4>Prototype (v 0.1 Beta)</h4>
+			<p>DigFAST is designed to support the encoding of "Digital Facsimiles" in TEI P5. It's a prototype that supports only a small subset of the possible TEI elements and attributes for diplomatic document encoding. Especially on the phrase level (e.g. tei:add and tei:del elements) the tool is not yet elaborated.</p>
+			<p>DigFAST can be used to capture the basic structure and spacial dimensions of zones and lines on a source document and to refer them to authorial text stages (tei:change). DigFAST does not aim to be a full TEI/XML editor but to visually support the first steps in the creation of a digital facsimile. The resulting TEI document can be exported and edited with an XML editor of your choice.</p>
+			<p>This prototype is developed as part of the project "Diachronic Markup and Presentation Practices for Text Edition in Digital Research Environments" at the chair of Digital Humanities, University of Passau, Germany.</p>
+			
+			<hr/>
+		</div>
+		<div>
+                            <h4>Sponsored by:</h4>
+			<a href="http://www.dfg.de/" target="_blank">
+                                <img class="sponsor_img" src="img/dfg_logo_blau.jpg"/>
+                            </a>
+			<a href="http://www.neh.gov/" target="_blank">
+                                <img class="sponsor_img" src="img/neh_logo_horizontal_rgb.jpg"/>
+                            </a>
+		</div>
+	  </div>
+	  <div class="modal-footer">
+		Development and Implementation: <a href="http://www.phil.uni-passau.de/dh/lehrstuhlteam/josua-schaeuble/" target="_blank">J. Schäuble</a> - Published under the <a href="http://www.gnu.org/licenses/gpl-3.0.txt" target="_blank">GNU GPLv3</a> license 
+	  </div>
+	</div>
+  </div>
+</div>
+
+
+
+<!-- 
+######################################################################
+                       TEXTSTAGE-MODAL 
+######################################################################
+-->
+<div class="modal fade" id="textstageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h3 class="modal-title" id="myModalLabel2">Select a Textstage</h3>
+	  </div>
+	  <div class="modal-body">
+		<a href="#" onclick="makeTextstageModal()">hase</a>
+		<ul id="textStagesList" class="list-group">
+			<li class="list-group-item">One</li>
+			<li class="list-group-item">Two
+				<ul class="list-group">
+					<li class="list-group-item">Item 2a</li>
+					<li class="list-group-item">Item 2b</li>
+				</ul>
+			</li>
+			<li class="list-group-item">Three
+				<ul class="list-group">
+					<li class="list-group-item">Item 3a</li>
+					<li class="list-group-item">Item 3b</li>
+				</ul>
+			</li>
+		</ul>
+	  </div>
+	  <div class="modal-footer">
+		<p>some more text</p> 
+	  </div>
+	</div>
+  </div>
+</div>
+
+
+
+</body>
+</html>

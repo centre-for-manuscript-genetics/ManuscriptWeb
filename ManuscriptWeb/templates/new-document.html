@@ -1,0 +1,104 @@
+<div class="windowcont-wrapper">
+    <header class="windowcont-header">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#uploader_tab" data-toggle="tab">
+                    <i class="far fa-file"/> Uploader</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#metadata_tab" data-toggle="tab">
+                    <i class="far fa-file"/> Metadata</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#transcript_tab" data-toggle="tab">
+                    <i class="far fa-file-code"/> Transcripts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#facsimile_tab" data-toggle="tab">
+                    <i class="far fa-file-image"/> Facsimiles</a>
+            </li>
+        </ul>
+    </header>
+    <div class="windowcont-content">
+        <div class="tab-content">
+            <div class="tab-pane active" id="uploader_tab">
+                <div data-template="app:resourceMetadataForm"/>
+            </div>
+            
+            <div class="tab-pane" id="metadata_tab">
+                <p>will come soon</p>
+            </div>
+            
+            <div class="tab-pane" id="transcript_tab">
+                <div>No transcripts uploaded yet</div>
+                <table id="files-table" class="files table table-striped">
+                    <thead>
+                        <tr>
+                            <th>filename</th>
+                            <th>folder</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transcript-files"/>
+                </table>
+            </div>
+            
+            <div class="tab-pane" id="facsimile_tab">
+                <div>No facsimiles uploaded yet</div>
+                <table id="files-table" class="files table table-striped">
+                    <thead>
+                        <tr>
+                            <th>filename</th>
+                            <th>folder</th>
+                        </tr>
+                    </thead>
+                    <tbody id="facsimile-files"/>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="windowcont-footer">
+        <div class="text-center">
+            <button class="app:newDocCloseButton btn btn-mw-outline my-2 save-newDoc">
+                <i class="far fa-save"/> Save</button>
+        </div>
+    </footer>
+</div><!--
+<div>
+        <div class="windowcont-wrapper">
+           
+            <div class="windowcont-content">
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="metadata_tab">
+                        <div data-template="app:resourceMetadataForm"/>
+                    </div>
+
+                    <div class="tab-pane" id="transcript_tab">
+                        <div>No transcripts uploaded yet</div>
+                        <table id="files-table" class="files table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>filename</th>
+                                    <th>folder</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transcript-files"/>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="facsimile_tab">
+                        <div>No facsimiles uploaded yet</div>
+                        <table id="files-table" class="files table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>filename</th>
+                                    <th>folder</th>
+                                </tr>
+                            </thead>
+                            <tbody id="facsimile-files"/>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+</div>-->

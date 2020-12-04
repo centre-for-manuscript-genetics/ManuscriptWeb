@@ -1,0 +1,22 @@
+<meta xmlns="http://exist-db.org/xquery/repo">
+    <description>Manuscript Web</description>
+    <author>Joshua Schäuble</author>
+    <website/>
+    <status>alpha</status>
+    <license>GNU-LGPL</license>
+    <copyright>true</copyright>
+    <type>application</type>
+    <target>ManuscriptWeb</target>
+    <prepare>pre-install.xql</prepare>
+    <finish/>
+    <permissions user="joshua" group="ManuscriptWeb" mode="rwxrwxr-x"/>
+
+
+
+
+
+
+
+
+
+<deployed>2020-09-02T10:31:52.19Z</deployed></meta>

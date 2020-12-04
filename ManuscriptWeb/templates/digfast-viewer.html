@@ -1,0 +1,47 @@
+<div xmlns="http://www.w3.org/1999/xhtml" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+    <!-- Grid row -->
+    <div class="row">
+        <!-- Grid column -->
+        <div id="transcard" class="col-md-6 mb-4 content-card">
+            <!-- navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Transcript </a>
+                        <!-- TODO: only give a selection-list if there are multiple transcripts available! -->
+                        <div class="dropdown-menu">
+                            <a class="app:listTranscripts"/>
+                        </div>
+                    </li>
+                </ul>
+                <div class="navbar-nav col-sm-5">
+                        <div data-template="app:pagination"/>
+                </div>
+                <ul class="navbar-nav mr-right ml-md-5">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-wrench"/>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link detach-button" href="#">
+                            <i class="fas fa-object-ungroup"/>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Exaple 1 -->
+            <div class="card example-1">
+                <div class="card-body">
+                    <div id="transcript">
+                        <div data-template="app:tei2html"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Grid column -->
+        <div class="col-md-6 mb-4 content-card" id="facsimile-card">
+            <div data-template="templates:include" data-template-path="templates/digFast.html"/>
+        </div>
+    </div>
+</div>

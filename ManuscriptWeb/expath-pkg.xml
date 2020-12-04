@@ -1,0 +1,19 @@
+<package xmlns="http://expath.org/ns/pkg" name="http://exist-db.org/apps/ManuscriptWeb" abbrev="ManuscriptWeb" version="0.5" spec="1.0">
+    <title>Manuscript Web</title>
+    <dependency package="http://exist-db.org/apps/shared"/>
+    <dependency package="http://www.functx.com"/>
+    
+    <!--
+    <package xmlns="http://expath.org/ns/pkg"
+        name="http://www.functx.com"
+        abbrev="functx"
+        version="1.0"
+        spec="1.0">
+        <title>FunctX library</title>
+        <xquery>
+            <namespace>http://www.functx.com</namespace>
+            <file>functx.xql</file>
+        </xquery>
+    </package>-->
+    
+</package>

@@ -1,0 +1,63 @@
+tei-hi[rend="underline"] {
+    text-decoration: underline;
+}
+
+/* circle rendition for text with a circle border */
+[rend="#circle"] {
+    padding: 10px;
+    border-radius: 56px 56px 56px 56px;
+               -moz-border-radius: 56px 56px 56px 56px;
+               -webkit-border-radius: 56px 56px 56px 56px;
+    border: 1px solid #000000;
+    
+}
+
+/*  */
+tei-note[resp="#ad"]{
+    display: none;
+}
+
+tei-note[resp="#ac"]{
+    display: block !important;
+    margin-top:15px;
+    margin-left: 25px;
+}
+
+tei-text{
+    line-height: 2 !important;
+    font-family: Open Sans !important; 
+    font-style: normal; 
+    font-variant: normal; 
+}
+
+tei-add{
+    color: green;
+    position: relative;
+    clear: right;
+    font-size: 80%;
+    top: -0.5em;
+}
+
+tei-del{
+    color: red;
+    text-decoration:line-through;
+}
+
+
+tei-p{
+    text-indent: 2em;
+}
+
+tei-head {
+    font-size:  110% !important;
+    padding-top: 15px !important;
+}
+
+tei-p > tei-lb:first-of-type{
+    display: none;
+}
+
+
+[rend="nobr"]{
+    float: left;
+}

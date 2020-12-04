@@ -1,0 +1,21 @@
+<div>
+    <nav aria-label="breadcrumb" class="app:getBreadCrumbs"/>
+    <div data-template="templates:if-parameter-set" data-template-param="org.exist-db.ManuscriptWeb.user">
+        
+        <div class="row justify-content-end">
+            <!-- todo: switch for library module. there: different buttons! (to be decided) -->
+            <div class="col-12 col-md-auto button-row">
+                <button data-template="app:newDocumentButton"/>
+                <button data-template="app:newCollectionButton"/>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+    <div id="thisDeck" class="row">
+        <div data-template="app:show-documents"/>
+    </div>
+    
+    
+</div>

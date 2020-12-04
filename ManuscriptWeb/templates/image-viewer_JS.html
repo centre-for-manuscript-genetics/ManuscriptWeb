@@ -1,0 +1,51 @@
+<div class="imageViewer iv-wrapper app:iv-loaddoc">
+    <div class="iv-header">Image Viewer</div>
+    <div class="iv-content ">
+        <div class="templates:include?path=templates/imagePreview.html"/>
+    </div>
+    <div class="iv-footer iv-thumbslider app:iv-printImages">
+       <!-- images are loaded here-->
+    </div>
+    
+
+    <!-- the horizontal scroll script -->
+    <!-- TODO: might have to go into document-viewer.html-->
+    <script type="text/javascript">
+        <!--
+       
+        jQuery(function ($) {
+            $.fn.hScroll = function (amount) {
+                amount = amount || 120;
+                $(this).bind("DOMMouseScroll mousewheel", function (event) {
+                    var oEvent = event.originalEvent, 
+                        direction = oEvent.detail ? oEvent.detail * -amount : oEvent.wheelDelta, 
+                        position = $(this).scrollLeft();
+                    position += direction > 0 ? -amount : amount;
+                    $(this).scrollLeft(position);
+                    event.preventDefault();
+                })
+            };
+        });
+        $(document).ready(function(){
+                $('div.iv-thumbslider').hScroll(100); // You can pass (optionally) scrolling amount
+                //load the active image, if there is one
+                //todo: useless animation?
+                $("div.iv-thumbslider" ).show();
+                }); 
+     
+        $(window).ready(function(){
+            console.log("juhu");
+            var offset = $(".iv-thumb-link.active").offset().left - $(".iv-thumb-link.active").parent().offset().left - $("#imageViewField").width() / 2 + $(".iv-thumb-link.active").width() / 2;
+            $("div.iv-thumbslider").animate({scrollLeft: "+=" + offset},1);
+          });
+         
+         /*
+        window.addEventListener("load",function(){
+            console.log("juhu");
+            var offset = $(".iv-thumb-link.active").offset().left - $(".iv-thumb-link.active").parent().offset().left - $("#imageViewField").width() / 2 + $(".iv-thumb-link.active").width() / 2;
+            $("div.iv-thumbslider").animate({scrollLeft: "+=" + offset},1);
+       
+        });*/
+        -->
+    </script>
+</div>

@@ -1,0 +1,255 @@
+/*#pane #title and #ghostpane for the draggable window are taken from http://codepen.io/zz85/pen/gbOoVP*/
+
+/* z-index starts at 118 (ghost pane) for the first window and ends at 120. 
+ * z-index increases for every additional window or window that is brought to the top */
+
+/* These vars are included by the ManuscriptWeb Controller*/
+/*:root {
+    --color-contrast-light: #ffc52d;
+    --color-contrast-bright: #ffbb2c;
+    --color-contrast-medium: #e97b30;
+    --color-contrast-dark: #f12d2e;
+  
+    --background-dark: #2e2e2e;
+    --background-light: #fbfbfb;
+    --background-medium: #4b4b49;
+   
+}*/
+
+
+.blockedWindow{
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+
+.pane,
+.ghostpane{
+    display:none;
+}
+
+div.pane{
+    position:absolute;
+    width:500px;
+    height:340px;
+    top:20%;
+    left:20%;
+    min-width:500px;
+    min-height:200px;
+     /*resize:both;
+     overflow:auto;*/
+    z-index:119;
+    margin:0;
+    padding:0;
+    padding-bottom:10px;
+    background: rgba(255, 255, 255, 0.85);
+    border:1px solid var(--color-contrast-light);
+   /*   background:rgba(227, 227, 227, 0.5);*/
+    -webkit-box-shadow:4px 4px 6px 0px rgba(227, 227, 227, 0.5);
+    -moz-box-shadow:4px 4px 6px 0px rgba(227, 227, 227, 0.5);
+    box-shadow:4px 4px 6px 0px rgba(227, 227, 227, 0.5);
+}
+
+div.paneTitle{
+    font-family:monospace;
+    /*background: white;   */
+    color:  #555555;
+    font-size:24px;
+    height:36px;
+    text-align:center;
+    /*  padding-bottom:6px;*/
+    border-bottom:1px solid var(--color-contrast-light);
+    position:relative;
+    z-index:120;
+}
+
+.pane_closeAndResize{
+    margin-top:5px;
+    margin-right:4px;
+    position:relative;
+    float:right;
+    text-align:right;
+}
+
+.glyphicon-remove{
+    color:#BBBBBB;
+}
+
+.glyphicon-remove:hover{
+    color:#555555;
+}
+
+div.ghostpane{
+    background:#999;
+    opacity:0.2;
+    width:500px;
+    height:340px;
+    top:20%;
+    left:20%;
+    position:absolute;
+    margin:0;
+    padding:0;
+    z-index:118;
+    -webkit-transition:all 0.25s ease-in-out;
+    -moz-transition:all 0.25s ease-in-out;
+    -ms-transition:all 0.25s ease-in-out;
+    -o-transition:all 0.25s ease-in-out;
+    transition:all 0.25s ease-in-out;
+}
+
+.pane_d1{
+    height:100%;
+}
+
+.pane_outerWrapper{
+    height:100%;
+}
+
+.pane_innerWrapper{
+    height:100%;
+    position:relative;
+}
+
+.pane_contentWrapper{
+    height:100%;
+    overflow:hidden;
+    box-sizing:border-box;
+    padding-top:36px;
+    width:100%;
+    position:absolute;
+    top:0;
+}
+
+
+.pane_functions{
+    padding:4px;
+    padding-top:5px;
+    height:58px;
+    border-bottom:1px rgb(157, 157, 157) dashed;
+    border-top:1px rgb(157, 157, 157) dashed;
+    background-color:#f5f5f5;
+    position:relative;
+    z-index:120;
+}
+
+div.pane_functions .btn-sm{
+    width:50px;
+}
+
+.btn:focus{
+    background-color:white;
+    outline:none;
+}
+
+.pane_singleContent{
+    position:absolute;
+    width: 100%;
+    height: calc(100% - 36px);
+    min-height: calc(100% - 36px);
+    overflow:auto;
+}
+
+
+.pane_doubleWindow{
+    position:relative;
+    max-height:50%;
+    overflow:auto;
+    padding:0px;
+   
+}
+.pane_doubleWindow:first-of-type{
+     border-bottom: 7px #e7e7e7 solid;
+}
+
+.activeHighlight{
+    background-color:lightgrey;
+    padding:3px;
+}
+
+.pr_label{
+    display:block;
+    float:left;
+    width:120px;
+    color:darkgrey;
+    font-weight:bold;
+}
+
+.proofinfotext{
+    text-indent:-120px;
+    margin-left:120px;
+    text-align:justify;
+}
+
+h3.head{
+    margin-top:4px;
+    font-size:large;
+}
+
+h3.more{
+    margin-top:4px;
+    text-decoration:underline;
+}
+
+.it{
+    font-style:italic;
+}
+
+span.tiny{
+    font-size:x-small;
+}
+
+span.transp_marker{ 
+    font-size : 120%;
+    color : blue;
+    background-color: white;
+}
+span.transp_marker span.lvl.gab{
+    font-size: 50%;
+}
+
+span.pagemarker{
+    text-indent:230px;
+    float:left;
+    width:250px;
+    text-align:left;
+    color:blue;
+}
+
+
+.btn-window-border{
+    color: var(--color-contrast-light);
+    background-color: transparent;
+    background-image: none;
+    border-color: var(--color-contrast-light);
+}
+
+.btn-window-border:hover{
+    color: #fff;
+    background-color: var(--color-contrast-light);
+    border-color:var(--color-contrast-light);
+    
+}
+
+div.activeWindow .btn-window-border{
+    color: var(--color-contrast-medium);
+}
+
+
+.pane_closeAndResize.btn-group-sm > .btn, .btn-sm {
+    padding: .15rem .3rem 0rem;
+}
+
+
+
+div.lockPane{
+    display: none;    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1070;
+    background-color: var(--background-medium);
+    opacity: 0.8;
+}
+

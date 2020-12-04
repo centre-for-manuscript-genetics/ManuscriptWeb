@@ -1,0 +1,133 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <!-- <title data-template="config:app-title"/> -->
+        <title>DanSeq - Genetic Edition of Aidan Chambers’ Dance Sequence Novels</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+        <meta data-template="config:app-meta"/>
+        
+        
+
+        <!-- favicon: little Manuscript Icon on the browser tab ;) -->
+        <link rel="apple-touch-icon" sizes="180x180" href="$app/resources/icons/favicon/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="$app/resources/icons/favicon/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="$app/resources/icons/favicon/favicon-16x16.png"/>
+        <link rel="manifest" href="$app/resources/icons/favicon/manifest.json"/>
+        <link rel="mask-icon" href="$app/resources/icons/favicon/safari-pinned-tab.svg" color="#5bbad5"/>
+        <meta name="theme-color" content="#ffffff"/>
+        
+        
+        <!--JQuery-->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"/>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+            
+        <!--css for main page/templates-->
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/custom.css"/>
+        
+        <!-- fetch google fonts from configuration -->
+        <link data-template="app:getGoogleFonts"/>
+        
+        
+        <!--select2 required for the font selector in the admin-settings -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"/>
+        
+        <!-- window manager's css -->
+        <link rel="stylesheet" type="text/css" href="$app/resources/js/windowmanager/windowManager.css"/>
+
+        <!-- FONTAWESOME CDN -->
+        <script defer="defer" src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            
+        <!-- JQuery UI -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"/>
+        
+        <!-- Fileuploader -->
+        <script type="text/javascript" src="$app/resources/js/fileuploader/jquery.ui.widget.js"/>
+        <script type="text/javascript" src="$app/resources/js/fileuploader/jquery.iframe-transport.js"/>
+        <script type="text/javascript" src="$app/resources/js/fileuploader/jquery.fileupload.js"/>
+        <!-- The File Upload processing plugin -->
+        <script src="$app/resources/js/fileuploader/jquery.fileupload-process.js"/>
+        <!-- The File Upload validation plugin -->
+        <script src="$app/resources/js/fileuploader/jquery.fileupload-validate.js"/>
+
+        <!-- tag it library for tags with auto completion in forms, e.g. search or new document form-->
+        <link href="$app/resources/js/tagIt/css/jquery.tagit.css" rel="stylesheet" type="text/css"/>
+        <link href="$app/resources/js/tagIt/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css"/>
+        <script src="$app/resources/js/tagIt/js/tag-it.js" type="text/javascript" charset="utf-8"/>
+
+        <!-- CETEI to visualize TEI in HTML -->
+        <link rel="stylesheet" href="$app/resources/js/CETEI/CETEIcean.css" type="text/css"/>
+        <script src="$app/resources/js/CETEI/CETEI.js" type="text/javascript" charset="utf-8"/>
+        
+        <!-- split.js to allow for customizable containers, e.g. text-image view-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.3.5/split.min.js"/>
+        
+        
+        <!-- visJS -->
+        <script charset="utf-8" type="text/javascript" src="$app/resources/js/visjs/vis.js"/>
+        <link href="$app/resources/js/visjs/vis.css" rel="stylesheet" type="text/css"/>
+        
+        <!-- MIRADOR -->
+        <!-- By default uses Roboto font. Be sure to load this or change the font -->
+        <script src="https://unpkg.com/mirador@beta/dist/mirador.min.js"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
+        
+        
+        <!-- CHRONOLOGY -->
+        <!--<script src="https://unpkg.com/timelines-chart"/>-->
+        <script src="https://d3js.org/d3.v5.min.js"/>
+        <script src="$app/resources/js/timelines-chart.js" type="text/javascript" charset="utf-8"/>
+        <script src="$app/resources/js/chronology-random-data.js"/>
+        
+        
+        
+        <!-- DataTable -->
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"/>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>
+        
+        
+    </head>
+    <body id="body">
+        <div data-template="app:getJSPathVariable"/>
+        <div class="body-wrapper">
+            
+            
+            <div class="menu-wrapper">
+                <!-- here goes the navigation template -->
+                <nav data-template="templates:include" data-template-path="templates/topmenu.html"/>
+            </div>
+
+
+            <div class="content-wrapper">
+                <div id="content" class="container maincontainer" role="main"/>
+                <!-- THIS DIV CALLS THE TEMPLATES TO PRODUCE THE LOGIN MODAL -->
+                <div data-template="templates:if-parameter-unset" data-template-param="org.exist-db.ManuscriptWeb.user">
+                    <div data-template="templates:include" data-template-path="templates/login-modal.html"/>
+                </div>
+                <!--  BOOTSTRAP AND LOADSOURCE FOR ALL VIEWS -->
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"/>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"/>
+
+                <script type="text/javascript" src="$shared/resources/scripts/loadsource.js"/>
+                <!-- ManuscriptWeb's own js functions:-->
+                <script type="text/javascript" src="$app/resources/js/manuscriptweb.js"/>
+                <!--the window manager:-->
+                <script type="text/javascript" src="$app/resources/js/windowmanager/windowManager.js"/>
+                
+                <div data-template="templates:if-parameter-set" data-template-param="org.exist-db.ManuscriptWeb.user">
+                    <!-- ADMINISTRATOR.JS ONLY FOR ADMINS -->
+                    <!-- autosize is a usefull library to size textareas and other stuff nicely depending on how much text is in there -->
+                    <script type="text/javascript" src="$app/resources/js/autosize.min.js"/>
+                    <script type="text/javascript" src="$app/resources/js/administrator.js"/>
+                </div>
+            </div>
+        </div>
+        
+        
+    </body>
+</html>

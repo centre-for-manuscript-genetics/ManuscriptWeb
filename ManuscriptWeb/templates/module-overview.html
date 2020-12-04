@@ -1,0 +1,31 @@
+<div>
+    <nav aria-label="breadcrumb" class="app:getBreadCrumbs"/>
+    <div data-template="templates:if-parameter-set" data-template-param="org.exist-db.ManuscriptWeb.user">
+        <!--
+        <div class="alert alert-warning" role="alert"> You have administrator rights. This means you
+            can easily edit the text contents of this page by clicking on them. Note that previous
+            states are overwritten and cannot be restored. Although you can rename the modules and
+            customize their descriptions according to your project, you cannot change their base
+            functionality: Even if you call the "library" module "notes" it will functionally stay
+            the library module. </div>-->
+
+        <div class="row justify-content-end">
+            <div class="col-12 col-md-auto button-row">
+                <a data-toggle="modal" href="#moduleModal" id="newModuleBtn" class="btn btn-mw-std btn-sm">
+                    <i class="far fa-plus-square"/> module</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="thatDeck" class="row ">
+        <div data-template="app:show-modules"/>
+    </div>
+
+    <!-- THIS DIV CALLS THE TEMPLATES TO PRODUCE THE MODAL FOR NEW MODULES -->
+    <div data-template="templates:if-parameter-set" data-template-param="org.exist-db.ManuscriptWeb.user">
+        <div data-template="templates:include" data-template-path="templates/new-module-modal.html"/>
+    </div>
+</div>

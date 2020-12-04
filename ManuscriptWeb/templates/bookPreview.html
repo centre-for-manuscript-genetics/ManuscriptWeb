@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title/>
+    </head>
+    <body>
+        <div class="bookWindow app:loadBibBook">
+            <div class="bookHeadline">
+                <h4>Your Selection</h4>
+            </div>
+            <div class="bookDataWrapper">
+                <table class="table">
+                    <tbody class="bookTable">
+                        <tr>
+                            <th>Bib-Ref (MLA):</th>
+                            <td>
+                                <span class="app:bookMLAref"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Records:</th>
+                            <td>
+                                <span class="app:bookCountRecords"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Feeding Into:</th>
+                            <td>
+                                <span class="app:bookGoesToList"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="bookHeadline">
+                <h4 class="readH">Reading Traces </h4> <div class="navbar-nav col-sm-5">
+                    <div class="input-group input-group-sm app:traceChangeButton">
+                        <div class="input-group-prepend"> 
+                            <a class="btn btn-outline-secondary carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" onclick="traceCounter(-1)">&lt;</a>
+                        </div>
+                        <input class="happyInput" aria-label="Text input with checkbox" placeholder="1" type="text"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text">/37</span>
+                            <a class="btn btn-outline-secondary carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" onclick="traceCounter(1)">&gt;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bookDataWrapper app:readingTraceSlider">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="card col-sm-6 col-md-6 ">
+                                    <div class="card-body">Sullivan 1920: 1</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/k-a.JPG" alt="Card image"/>
+                                </div>
+                                <div class="card card col-sm-6 col-md-6">
+                                    <div class="card-body">VI.B.6 p.056 note (a)</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/a.JPG" alt="Card image"/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="card col-sm-6 col-md-6 ">
+                                    <div class="card-body">Sullivan 1920: 1</div>
+                                    <img class="card-img-top" src="exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/k-b.JPG" alt="Card image"/>
+                                </div>
+                                <div class="card card col-sm-6 col-md-6">
+                                    <div class="card-body">VI.B.6 p.056 note (b)</div>
+                                    <img class="card-img-top" src="exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/b.JPG" alt="Card image"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="card col-sm-6 col-md-6 ">
+                                    <div class="card-body">Sullivan 1920: 2</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/k-c.JPG" alt="Card image"/>
+                                </div>
+                                <div class="card card col-sm-6 col-md-6">
+                                    <div class="card-body">VI.B.6 p.056 note (c)</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/c.JPG" alt="Card image"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bookHeadline">
+                <h4>Certainty Evaluation:</h4>
+            </div>
+            <div class="bookDataWrapper app:sourceCertainty">
+                <p>very</p>
+            </div>
+            
+            </div>
+    </body>
+</html>

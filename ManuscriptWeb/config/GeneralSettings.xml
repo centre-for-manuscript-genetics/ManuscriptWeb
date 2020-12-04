@@ -1,0 +1,61 @@
+<Settings>
+    
+    
+    <Section name="pages">
+        <Page serve="templates/index-content.html" url="home"/>--&gt;
+       <!-- <Page serve="explorer.html" url="modules"/>-->
+        <Page serve="templates/chronology-content.html" url="chronology"/>
+        <Page serve="templates/settings-content.html" url="settings"/>
+        <Page serve="templates/about-content.html" url="about"/>
+        <Page serve="templates/cite-content.html" url="cite"/>
+        <Page serve="templates/library-content.html" url="library-viewer"/>
+        <Page serve="templates/htr.html" url="htr"/>
+    </Section>
+    
+    
+    
+    
+    <Section name="design">
+        <Colours>
+            <!--<CSSvar type="color" xml:id="color-contrast-light" default="#ffc52d">#8080ff</CSSvar>-->
+            <CSSvar type="color" xml:id="color-contrast-bright" default="#ffbb2c">#ffbb2c</CSSvar>
+            <CSSvar type="color" xml:id="color-contrast-medium" default="#f12d2e">#f12d2e</CSSvar>
+            <!-- <CSSvar type="color" xml:id="color-contrast-dark" default="#f12d2e">#ef1818</CSSvar>-->
+            <CSSvar type="color" xml:id="background-dark" default="#2e2e2e">#353535</CSSvar>
+            <CSSvar type="color" xml:id="background-light" default="#fbfbfb">#ffffff</CSSvar>
+            <CSSvar type="color" xml:id="text-color-standard" default="#000000">#000000</CSSvar>
+        </Colours>
+        <Fonts>
+            <CSSvar type="googlefont" xml:id="font-default" default="Poiret One">Archivo</CSSvar>
+            <CSSvar type="googlefont" xml:id="font-nav" default="Poiret One">Amaranth</CSSvar>
+            <CSSvar type="googlefont" xml:id="font-headline" default="Poiret One">Amatic SC</CSSvar>
+        </Fonts>
+    </Section>
+    
+    
+    <Section name="chronology">
+    </Section>
+    
+    
+    
+    <Section name="library">
+    </Section>
+    
+    
+    
+    
+    <Section name="IIIF">
+        <ProxyImageServer active="true">
+            <LocalLink>http://localhost/iipsrv/</LocalLink>
+            <WebLink>https://chambers.uantwerpen.be/images/</WebLink>
+        </ProxyImageServer>
+     </Section>
+    
+    
+    
+    <Section name="HTR" active="false">
+        <APIServer/>
+        <Username/>
+    </Section>
+    
+</Settings>

@@ -1,0 +1,193 @@
+:root {
+    --color-contrast-light: #c5d3d3;
+    --color-contrast-bright: #008000;
+    --color-contrast-medium: #648282;
+    --color-contrast-dark: #4c6363;
+
+    --background-dark: #343a40;
+    --background-light: #fbfbfb;
+    --background-medium: #f3f3f3;
+
+}
+
+
+/* this is just a test */
+
+#rotation_area{
+	display:none;
+}	
+
+.resizeButtons{
+	position: absolute;
+	margin: auto;
+	left: 20px;
+	top: 45px;
+	z-index: 1;
+}
+
+
+	
+#svg_area {
+	float: left;
+    overflow: auto;
+}
+
+
+.text-input {
+	width: 100px;
+    padding-left: 10px;
+	padding-right: 10px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
+.sponsor_img{
+	padding-left:30px;
+	height: 40px;
+	width:auto;
+	
+}
+
+
+.tinyicon{
+	width: 10px;
+	height: 10px;
+}
+
+.textfeld {
+	width: 150px;
+	border-radius: 25px;
+    border: 2px solid #8AC007;
+    padding: 5px;
+	margin: 0px;
+}
+
+
+.rsvg {
+  width: 400;
+  height: 240px;
+  background-color: #2e9;
+  
+  -ms-touch-action: none;
+      touch-action: none;
+}
+
+
+.edit-rectangle {
+  fill: grey;
+  fill-opacity: 0.1;
+  stroke: #808080;
+  stroke-opacity: 1;
+}
+
+.locked-rectangle{
+  fill:green;
+  fill-opacity: 0.05;
+  stroke:#F0F0F0;
+  stroke-opacity:0.5;
+}
+.active-rectangle{
+  fill:blue;
+  fill-opacity: 0.3;
+  stroke:#8AC007;
+  stroke-opacity:1;
+}
+.locked-rectangle{
+  fill:green;
+}
+
+.hidden-rectangle {
+  fill:white;
+  fill-opacity: 0;
+  stroke: white;
+  stroke-opacity:0;
+  opacity: 0;
+}
+
+.hidden-rectangle:hover {
+  fill:beige;
+  fill-opacity: 0.2;
+  stroke: blue;
+  stroke-opacity:1;
+  opacity: 1;
+}
+
+.hidden-rectangle foreignObject {
+  fill:white;
+  fill-opacity: 0;
+  stroke: white;
+  stroke-opacity:0;
+}
+
+.hidden-rectangle foreignObject:hover {
+  fill:black;
+  fill-opacity: 1;
+}
+
+/*TODO: visually highlight parent surface and/or zone*/
+.active-surface{
+	
+}
+
+.rectDone{
+    background-color: lightgray;
+}
+.active-zone{
+	
+}
+
+
+.rot_img{
+	width: 20px;
+	height: 20px;
+}
+.rot_img:hover{
+	opacity: 0.5;
+}
+
+
+body { margin: 0; }
+
+
+
+.element_surface>text{
+	opacity: 0.05;
+}	
+
+
+.btn_after_start{
+	display:none;
+}
+
+
+li.rangeSlider{
+    padding-top:10px;
+    
+}
+
+input[type="range"]:disabled{
+    opacity: 0.2;
+    
+}
+
+.digFastActiveEdit, .digFastIcons{
+    background-color: var(--background-dark);
+}
+.digFastIcons{
+    padding-right: 5px;
+}
+
+.text-rectangle{
+    opacity: 0;
+}
+.text-rectangle:hover{
+    opacity: 1;
+    cursor: crosshair;
+}
+.powerMe{
+  fill:red;
+  fill-opacity: 0.1;
+  stroke:red;
+  stroke-opacity:1;
+}

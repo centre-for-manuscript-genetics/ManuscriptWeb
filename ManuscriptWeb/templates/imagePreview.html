@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title/>
+            <link rel="stylesheet" type="text/css" href="/exist/apps/ManuscriptWeb/resources/js/DigFast/css/digfast.css"/>
+            <script src="/exist/apps/ManuscriptWeb/resources/js/DigFast/js/interact-1.2.4.js"/>
+        
+    </head>
+    <body>
+        <div class="bookWindow">
+            <!--
+            <div class="bookHeadline">
+                <h4>Your Selection: Page {pagenumber}</h4>
+            </div>-->
+            <div>
+                <div id="editContainer">
+                    <div id="svg_area" class="resize-container">
+                        <svg data-template="app:getDigFastZone"/>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="bookHeadline">
+                <h4 class="readH">Relations: </h4> <div class="navbar-nav col-sm-5">
+                    <div class="input-group input-group-sm ">
+                        <div class="input-group-prepend"> 
+                            <a class="btn btn-outline-secondary carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" onclick="traceCounter(-1)"><</a>
+                        </div>
+                        <input class="happyInput" aria-label="Text input with checkbox" placeholder="1" type="text"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text">/37</span>
+                            <a class="btn btn-outline-secondary carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" onclick="traceCounter(1)">></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bookDataWrapper ">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="card col-sm-6 col-md-6 ">
+                                    <div class="card-body">Sullivan 1920: 1</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/k-a.JPG" alt="Card image"/>
+                                </div>
+                                <div class="card card col-sm-6 col-md-6">
+                                    <div class="card-body">VI.B.6 p.056 note (a)</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/a.JPG" alt="Card image"/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="card col-sm-6 col-md-6 ">
+                                    <div class="card-body">Sullivan 1920: 1</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/k-b.JPG" alt="Card image"/>
+                                </div>
+                                <div class="card card col-sm-6 col-md-6">
+                                    <div class="card-body">VI.B.6 p.056 note (b)</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/b.JPG" alt="Card image"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="card col-sm-6 col-md-6 ">
+                                    <div class="card-body">Sullivan 1920: 2</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/k-c.JPG" alt="Card image"/>
+                                </div>
+                                <div class="card card col-sm-6 col-md-6">
+                                    <div class="card-body">VI.B.6 p.056 note (c)</div>
+                                    <img class="card-img-top" src="/exist/apps/ManuscriptWeb/data/modules/library-369088f9/fakePages/c.JPG" alt="Card image"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bookHeadline">
+                <h4>Certainty Evaluation:</h4>
+            </div>
+            <div class="bookDataWrapper ">
+                <p>very</p>
+            </div>
+            -->
+        </div>
+        <script src="/exist/apps/ManuscriptWeb/resources/js/DigFast/js/DigFast_new.js"/>
+        <script src="/exist/apps/ManuscriptWeb/resources/js/DigFast/js/jquery.fittext.js" type="text/javascript"/>
+        <script src="/exist/apps/ManuscriptWeb/resources/js/DigFast/js/jquery.quickfit.js" type="text/javascript"/>
+        <script src="/exist/apps/ManuscriptWeb/resources/js/DigFast/js/jquery.textfill.js" type="text/javascript"/>
+        
+        <script type="text/javascript">
+            <!--
+                /*when the page is loaded with the dummy image (thumb) start loading the real image and then replace*/
+                (() => {
+                  'use strict';
+                  // get all images with class .asyncImage (those are loaded as thumbs only)
+                  const objects = document.getElementsByClassName('asyncImage');
+                  Array.from(objects).map((item) => {
+                    // Start loading image
+                    const img = new Image();
+                    img.src = item.dataset.href;
+                    // Once image is loaded replace the href of the svg:image element and remove the class
+                    img.onload = () => {
+                      item.classList.remove('asyncImage');
+                      //TODO: maybe find a nicer animation for this change.
+                      $(item).fadeOut(100, function(){
+                        item.setAttributeNS(null, 'href', item.dataset.href);
+                      }).fadeIn(100);
+                    };
+                  });
+                })();
+            -->
+        </script>
+        
+    </body>
+</html>

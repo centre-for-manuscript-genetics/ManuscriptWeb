@@ -1,0 +1,46 @@
+<div class="textViewer tv-wrapper">
+    <div class="tv-header">Text Viewer for Transcript: <span data-template="app:tv-transcriptselector"/> </div>
+    <div class="tv-content">
+        <div class="bookWindow">
+            <div class="editContainer"/>
+        </div>
+    </div>
+    <div class="tv-footer tv-thumbslider">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-sm justify-content-center">
+                <li class="page-item tv-pagi tv-pagi-first">
+                    <a class="page-link" tabindex="-1">First</a>
+                </li>
+                <li class="page-item tv-pagi tv-pagi-prev">
+                    <a class="page-link">1</a>
+                </li>
+                <li class="page-item tv-pagi tv-pagi-curr">
+                    <a class="page-link">2</a>
+                </li>
+                <li class="page-item tv-pagi tv-pagi-next">
+                    <a class="page-link">3</a>
+                </li>
+                <li class="page-item tv-pagi tv-pagi-last">
+                    <a class="page-link">Last</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <script src="$app/resources/js/CETEI/CETEI.js" type="text/javascript" charset="utf-8"/>
+        <script type="text/javascript">
+            <!--
+               $(document).ready(function(){
+                    var url = new URL(window.location.href);
+                    var pagenum = url.searchParams.get("pagenum");
+                    
+                    
+                    //this function requests the currently selected TS from the selector above
+                    var tsID = $("#textViewField").find(".transcriptSelect option[selected]").data('file');
+                    var where = $("#textViewField div.editContainer")
+                    
+                    tvGetTS(where, tsID, $.isNumeric(pagenum) ? pagenum : 1, function(){chron_loadSources();}); 
+                });
+            -->
+        </script>
+
+</div>
