@@ -1,2 +1,3 @@
 # ManuscriptWeb
-ManuscriptWeb Research Infrastructure
+ManuscriptWeb Research Infrastructure 
+(development repository)
