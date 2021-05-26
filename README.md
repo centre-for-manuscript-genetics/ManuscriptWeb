@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/318465575.svg)](https://zenodo.org/badge/latestdoi/318465575)
+[![License](https://img.shields.io/github/license/centre-for-manuscript-genetics/ManuscriptWeb)](https://github.com/centre-for-manuscript-genetics/ManuscriptWeb/blob/main/LICENSE)
+
 # Manuscript Web
 Manuscript Web is a Virtual Research Environment developed as an open [eXist-db](http://exist-db.org/exist/apps/homepage/index.html) application for publishing documents and their transcriptions in the form of a digital scholarly edition, allowing textual scholars to expose links and relations between a literary or historical work’s different versions. 
 
