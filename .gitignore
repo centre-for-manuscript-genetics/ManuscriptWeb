@@ -8,3 +8,5 @@ ManuscriptWeb/data/relations/*
 ManuscriptWeb/data/libraryAuthors/*
 ManuscriptWeb/data/sources.xml
 ManuscriptWeb/data/restrictImages.xml
+
+.DS_Store
